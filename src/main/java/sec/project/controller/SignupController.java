@@ -14,8 +14,8 @@ public class SignupController {
     @Autowired
     private SignupRepository signupRepository;
 
-    @RequestMapping("*")
-    public String defaultMapping() {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String getRootPage() {
         return "redirect:/form";
     }
 
