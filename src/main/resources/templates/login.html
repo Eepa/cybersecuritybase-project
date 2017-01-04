@@ -6,7 +6,7 @@
 <div tiles:fragment="content">
     <form name="f" th:action="@{/login}" method="post">
         <fieldset>
-            <legend>Login in order to signup to an event</legend>
+            <legend>Login to your account in order to signup to an event</legend>
             <div th:if="${param.error}" class="alert alert-error">
                 Invalid username and password.
             </div>
@@ -22,6 +22,8 @@
             </div>
         </fieldset>
     </form>
+
+    <a th:href="@{/signup}">Create an account</a>
 </div>
 </body>
 </html>

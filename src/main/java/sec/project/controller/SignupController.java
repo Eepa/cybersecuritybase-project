@@ -16,15 +16,15 @@ public class SignupController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getRootPage() {
-        return "redirect:/form";
+        return "redirect:/eventsignup";
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    @RequestMapping(value = "/eventsignup", method = RequestMethod.GET)
     public String loadForm() {
-        return "form";
+        return "event_signup_form";
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.POST)
+    @RequestMapping(value = "/eventsignup", method = RequestMethod.POST)
     public String submitForm(@RequestParam String name, @RequestParam String address) {
         signupRepository.save(new Signup(name, address));
         return "done";
