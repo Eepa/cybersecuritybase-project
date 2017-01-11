@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Event signups</title>
-    </head>
-    <body>
-        <div th:if="${param.done}">
-            <h1>Thank you! You have been signed up to the event!</h1>
-        </div>
+<head>
+    <title>Event signups</title>
+</head>
+<body>
 
-    </body>
+<header>
+    <a th:href="@{/logout}">Logout</a>
+</header>
+
+<br/>
+
+<div th:if="${param.done}">
+    <h3>Thank you! You have been signed up to the event!</h3>
+</div>
+
+<h1>Event signups</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Event</th>
+        <th>Name</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:if="${eventsignups.empty}">
+        <td colspan="4">No signups yet!</td>
+    </tr>
+
+    <tr th:each="eventsignup : ${eventsignups}">
+        <td>Event 1</td>
+        <td th:text="${eventsignup.name}">Your name</td>
+        <td th:text="${eventsignup.address}">Your address</td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<a th:href="@{/eventsignups/new}">Signup for an event</a>
+</body>
 </html>
