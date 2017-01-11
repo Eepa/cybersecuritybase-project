@@ -16,18 +16,23 @@ public class EventSignupController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getRootPage() {
-        return "redirect:/eventsignup";
+        return "redirect:/eventsignups/new";
     }
 
-    @RequestMapping(value = "/eventsignup", method = RequestMethod.GET)
-    public String loadForm() {
-        return "event_signup_form";
+    @RequestMapping(value = "/eventsignups", method = RequestMethod.GET)
+    public String getEventSignups() {
+        return "event_signups";
     }
 
-    @RequestMapping(value = "/eventsignup", method = RequestMethod.POST)
-    public String submitForm(@RequestParam String name, @RequestParam String address) {
+    @RequestMapping(value = "/eventsignups/new", method = RequestMethod.GET)
+    public String getNewEventSignupForm() {
+        return "event_signups_form";
+    }
+
+    @RequestMapping(value = "/eventsignups", method = RequestMethod.POST)
+    public String createEventSignup(@RequestParam String name, @RequestParam String address) {
         signupRepository.save(new EventSignup(name, address));
-        return "done";
+        return "redirect:/eventsignups?done";
     }
 
 }
