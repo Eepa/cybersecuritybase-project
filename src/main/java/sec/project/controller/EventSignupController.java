@@ -5,14 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import sec.project.domain.Signup;
-import sec.project.repository.SignupRepository;
+import sec.project.domain.EventSignup;
+import sec.project.repository.EventSignupRepository;
 
 @Controller
-public class SignupController {
+public class EventSignupController {
 
     @Autowired
-    private SignupRepository signupRepository;
+    private EventSignupRepository signupRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getRootPage() {
@@ -26,7 +26,7 @@ public class SignupController {
 
     @RequestMapping(value = "/eventsignup", method = RequestMethod.POST)
     public String submitForm(@RequestParam String name, @RequestParam String address) {
-        signupRepository.save(new Signup(name, address));
+        signupRepository.save(new EventSignup(name, address));
         return "done";
     }
 

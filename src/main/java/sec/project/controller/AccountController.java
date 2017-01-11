@@ -10,7 +10,7 @@ import sec.project.domain.Account;
 import sec.project.repository.AccountRepository;
 
 @Controller
-public class SignupAccountController {
+public class AccountController {
 
     @Autowired
     private AccountRepository accountRepository;
