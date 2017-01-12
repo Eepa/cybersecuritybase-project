@@ -16,6 +16,18 @@
 </div>
 
 <h1>Event signups</h1>
+
+<form name="f" th:action="@{/eventsignups/search}" method="post">
+    <fieldset>
+        <legend>Search for signup</legend>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name"/>
+        <div class="form-actions">
+            <button type="submit" class="btn">Search</button>
+        </div>
+    </fieldset>
+</form>
+
 <table>
     <thead>
     <tr>

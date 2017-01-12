@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sec.project.domain.EventSignup;
 import sec.project.repository.EventSignupRepository;
 
+import java.util.List;
+
 @Controller
 public class EventSignupController {
 
@@ -35,6 +37,13 @@ public class EventSignupController {
     public String createEventSignup(@RequestParam String name, @RequestParam String address) {
         eventSignupRepository.save(new EventSignup(name, address));
         return "redirect:/eventsignups?done";
+    }
+
+    @RequestMapping(value = "/eventsignups/search", method = RequestMethod.POST)
+    public String searchEventSignup(@RequestParam String name, Model model) {
+        List<EventSignup> eventSignups = eventSignupRepository.findByName(name);
+        model.addAttribute("eventsignups", eventSignups);
+        return "event_signups";
     }
 
 }
