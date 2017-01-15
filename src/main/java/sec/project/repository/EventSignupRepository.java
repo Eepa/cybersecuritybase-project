@@ -14,4 +14,6 @@ public interface EventSignupRepository extends JpaRepository<EventSignup, Long> 
     @Query("SELECT es FROM EventSignup es WHERE es.name = :name")
     List<EventSignup> findByName(@Param("name") String name);
 
+    void deleteByNameAndAddress(String name, String address);
+
 }

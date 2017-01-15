@@ -30,30 +30,26 @@
     </fieldset>
 </form>
 
-<table>
-    <thead>
-    <tr>
-        <th>Event</th>
-        <th>Name</th>
-        <th>Address</th>
-    </tr>
-    </thead>
+<ul>
 
-    <tbody>
-    <tr th:if="${eventsignups.empty}">
-        <td colspan="4">No signups yet!</td>
-    </tr>
+    <li th:if="${eventsignups.empty}">
+        <span>No signups yet!</span>
+    </li>
 
-    <tr th:each="eventsignup : ${eventsignups}">
-        <td>Event 1</td>
-        <td th:utext="${eventsignup.name}">Your name</td>
-        <td th:utext="${eventsignup.address}">Your address</td>
-    </tr>
-    </tbody>
-</table>
+    <li th:each="eventsignup : ${eventsignups}">
+        Event 1
+        NAME: <span th:utext="${eventsignup.name}">Your name</span>
+        ADDRESS: <span th:utext="${eventsignup.address}">Your address</span>
+        <form th:action="@{/eventsignups/delete}" method="post">
+            <input type="hidden" name="name" th:value="${eventsignup.name}" />
+            <input type="hidden" name="address" th:value="${eventsignup.address}" />
+            <input type="submit" value="Delete" />
+        </form>
+        <br/>
+    </li>
+</ul>
 
-<br/>
-<br/>
+
 <br/>
 <br/>
 <br/>

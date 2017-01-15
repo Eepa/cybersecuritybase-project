@@ -43,6 +43,11 @@ public class EventSignupController {
         return "redirect:/eventsignups?done";
     }
 
+    @RequestMapping(value = "/eventsignups/delete", method = RequestMethod.POST)
+    public String deleteEventSignup(@RequestParam String name, @RequestParam String address) {
+        eventSignupService.removeEventSignup(name, address);
+        return "redirect:/eventsignups";
+    }
 
     @RequestMapping(value = "/eventsignups/search", method = RequestMethod.POST)
     public String searchEventSignup(@RequestParam String name, Model model) {
