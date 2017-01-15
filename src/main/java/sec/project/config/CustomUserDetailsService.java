@@ -1,8 +1,6 @@
 package sec.project.config;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         account = new Account();
         account.setUsername("test");
         account.setPassword(passwordEncoder.encode("test"));
+        account.setAdmin(true);
         accountRepository.save(account);
     }
 
@@ -47,6 +46,13 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("No such user: " + username);
         }
 
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        if(account.isAdmin()) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+
         return new org.springframework.security.core.userdetails.User(
                 account.getUsername(),
                 account.getPassword(),
@@ -54,6 +60,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true,
                 true,
                 true,
-                Arrays.asList(new SimpleGrantedAuthority("USER")));
+                authorities);
     }
 }

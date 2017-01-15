@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import sec.project.domain.EventSignup;
 import sec.project.repository.EventSignupRepository;
+import sec.project.service.EventSignupService;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class EventSignupController {
 
     @Autowired
     private EventSignupRepository eventSignupRepository;
+
+    @Autowired
+    private EventSignupService eventSignupService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getRootPage() {
@@ -35,9 +39,10 @@ public class EventSignupController {
 
     @RequestMapping(value = "/eventsignups", method = RequestMethod.POST)
     public String createEventSignup(@RequestParam String name, @RequestParam String address) {
-        eventSignupRepository.save(new EventSignup(name, address));
+        eventSignupService.saveEventSignup(name, address);
         return "redirect:/eventsignups?done";
     }
+
 
     @RequestMapping(value = "/eventsignups/search", method = RequestMethod.POST)
     public String searchEventSignup(@RequestParam String name, Model model) {
