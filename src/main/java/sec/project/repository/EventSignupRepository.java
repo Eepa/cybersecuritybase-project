@@ -11,7 +11,7 @@ public interface EventSignupRepository extends JpaRepository<EventSignup, Long> 
 
     List<EventSignup> findAll();
 
-    @Query(value= "select * from Event_Signup es where es.name = ?1 and es.address = 'moi'", nativeQuery = true)
-    List<EventSignup> findByName(String name);
+    @Query("SELECT es FROM EventSignup es WHERE es.name = :name")
+    List<EventSignup> findByName(@Param("name") String name);
 
 }
