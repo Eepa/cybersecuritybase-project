@@ -18,7 +18,6 @@ public class EventSignupService {
         eventSignupRepository.save(new EventSignup(name, address));
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @Transactional
     public void removeEventSignup(String name, String address) {
         eventSignupRepository.deleteByNameAndAddress(name, address);

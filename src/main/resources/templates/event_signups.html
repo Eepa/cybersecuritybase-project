@@ -40,7 +40,8 @@
         Event 1
         NAME: <span th:utext="${eventsignup.name}">Your name</span>
         ADDRESS: <span th:utext="${eventsignup.address}">Your address</span>
-        <form th:action="@{/eventsignups/delete}" method="post">
+
+        <form th:action="@{/eventsignups/delete}" method="post" th:if="${userIsAdmin}">
             <input type="hidden" name="name" th:value="${eventsignup.name}" />
             <input type="hidden" name="address" th:value="${eventsignup.address}" />
             <input type="submit" value="Delete" />

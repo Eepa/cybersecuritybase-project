@@ -35,6 +35,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         account.setPassword(passwordEncoder.encode("test"));
         account.setAdmin(true);
         accountRepository.save(account);
+
+        account = new Account();
+        account.setUsername("wasd");
+        account.setPassword(passwordEncoder.encode("wasd"));
+        account.setAdmin(false);
+        accountRepository.save(account);
     }
 
     @Override

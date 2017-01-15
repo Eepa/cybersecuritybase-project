@@ -1,6 +1,9 @@
 package sec.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +31,12 @@ public class EventSignupController {
 
     @RequestMapping(value = "/eventsignups", method = RequestMethod.GET)
     public String getEventSignups(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Boolean isAdmin = auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
         model.addAttribute("eventsignups", eventSignupRepository.findAll());
+        model.addAttribute("userIsAdmin", isAdmin);
         return "event_signups";
     }
 
