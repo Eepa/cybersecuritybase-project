@@ -9,7 +9,7 @@ Normal user: wasd, password: wasd
 
 1. Sign in with test account
 2. Click button "Signup for an event"
-3. Input " < script>alert("Hello!");</script > " to the name field and some text to address field (remove space character from between "<" and "s" and "t" and ">" from script-tags)
+3. Input " < script>alert("Hello!");< /script> " to the name field and some text to address field (remove space character from between "<" and "s" and and "/" from script-tags)
 4. Submit form
 5. You can see that the javascript gets executed when you see the alert
 
@@ -21,7 +21,7 @@ The flaw can be fixed by using th:text instead of th:utext in event_signups.html
 **Steps to reproduce:**
 
 1. Sign in with test account 
-2. Open developer console in your browser (For example like [this](https://developers.google.com/web/tools/chrome-devtools/console/)
+2. Open developer console in your browser (For example like [this](https://developers.google.com/web/tools/chrome-devtools/console/))
 3. Write document.cookie to the console and press enter
 4. You can see the JSESSIONID of your session
 
