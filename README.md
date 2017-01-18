@@ -4,12 +4,12 @@ Test accounts you can use to test the project are:
 Admin user: test, password: test
 Normal user: wasd, password: wasd
 
-For every issue the prerequisite is that you have started the server. The default address is http://localhost:8080
+For every issue the prerequisite is that the application is running and the server is started. The default address and port for the server is http://localhost:8080
 
 ## Issue: A3-Cross-Site Scripting (XSS)
 **Steps to reproduce:**
 
-1. Sign in with test account
+1. Sign in with one of the test account
 2. Click button "Signup for an event"
 3. Input " < script>alert("Hello!");< /script> " to the name field and some text to address field (remove space character from between "<" and "s" and and "/" from script-tags)
 4. Submit form
@@ -22,7 +22,7 @@ The flaw can be fixed by using th:text instead of th:utext in event_signups.html
 ## Issue: A5-Security Misconfiguration
 **Steps to reproduce:**
 
-1. Sign in with test account 
+1. Sign in with one of the test accounts 
 2. Open developer console in your browser (For example like [this](https://developers.google.com/web/tools/chrome-devtools/console/))
 3. Write document.cookie to the console and press enter
 4. You can see the JSESSIONID of your session
@@ -87,10 +87,18 @@ You can verify that the fix works by repeating the above steps with Postman afte
 
 ## Issue: A8-Cross-Site Request Forgery (CSRF)
 **Steps to reproduce:**
-1. 
+
+1. Go to the address http://localhost:8080
+2. Open developer tools Network tab in your browser (For example like [this](https://developers.google.com/web/tools/chrome-devtools/network-performance/resource-loading))
+3. Sign in with one of the test accounts 
+4. You should see one POST-request in the network tab
+5. Click the name of the POST-request "login" and select "Headers"-tab
+6. Scroll down in the headers so tab you can see "Form data"-information
+7. If CSRF protection were enabled you should see _csrf-token_ there but now you cannot see that token 
 
 **How to fix:**
 
+The flaw can be fixed by removing line "http.csrf().disable();" from class SecurityConfiguration.
 
 ## Issue: A9-Using Components with Known Vulnerabilities
 **Steps to reproduce:**
