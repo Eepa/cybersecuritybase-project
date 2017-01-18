@@ -37,9 +37,9 @@ The flaw can be fixed by setting context.setUseHttpOnly(false) to context.setUse
 1. Get Postman (for example in Chrome from [here](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop))
 2. Start Postman
 3. Send following requests to server. You can send a request like this:
-⋅⋅1. Input the address to "Enter request URL" -field
-⋅⋅2. Select right HTTP method (GET or POST) from dropdown
-⋅⋅3. In POST-requests select "Body"-tab and select "form-data" from radio buttons and set data by giving key and value pairs
+  1. Input the address to "Enter request URL" -field
+  2. Select right HTTP method (GET or POST) from dropdown
+  3. In POST-requests select "Body"-tab and select "form-data" from radio buttons and set data by giving key and value pairs
 
 ##### Requests:
 
@@ -50,7 +50,7 @@ The flaw can be fixed by setting context.setUseHttpOnly(false) to context.setUse
   
   --> You are now logged in as normal user "wasd" who should not be able to remove signups
   
-  2. POST http://localhost:8080/eventsignups
+  	2. POST http://localhost:8080/eventsignups
 	Body:
 	name test
 	address test
@@ -64,18 +64,18 @@ The flaw can be fixed by setting context.setUseHttpOnly(false) to context.setUse
   
   --> You can see new signup for "test2"
   
-  4. GET http://localhost:8080/eventsignups
+  	4. GET http://localhost:8080/eventsignups
   
   --> You can see that response still contains 2 signups
   
-  5. POST http://localhost:8080/eventsignups/delete
+  	5. POST http://localhost:8080/eventsignups/delete
 	Body:
 	name test2
 	address test2
   
   --> You can see that "test2" signup was removed from the signups even though user "wasd" should not be able to remove signups
   
-  6. GET http://localhost:8080/eventsignups
+  	6. GET http://localhost:8080/eventsignups
   
   --> You can verify that the "test2" signup is removed and that the user "wasd" cannot see the delete buttons 
   
