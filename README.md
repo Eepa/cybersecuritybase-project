@@ -1,6 +1,6 @@
 # Cyber Security Base - Course Project I - Report
 
-Test accounts you can use to test the project are:
+Test accounts which you can use to test the project are:
 
 Admin user: test, password: test
 
