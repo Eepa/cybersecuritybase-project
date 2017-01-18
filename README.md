@@ -4,6 +4,8 @@ Test accounts you can use to test the project are:
 Admin user: test, password: test
 Normal user: wasd, password: wasd
 
+For every issue the prerequisite is that you have started the server. The default address is http://localhost:8080
+
 ## Issue: A3-Cross-Site Scripting (XSS)
 **Steps to reproduce:**
 
@@ -31,10 +33,57 @@ The flaw can be fixed by setting context.setUseHttpOnly(false) to context.setUse
 
 ## Issue: A7-Missing Function Level Access Control
 **Steps to reproduce:**
-1. 
+
+1. Get Postman (for example in Chrome from [here](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop))
+2. Start Postman
+3. Send following requests to server. You can send a request like this:
+⋅⋅1. Input the address to "Enter request URL" -field
+⋅⋅2. Select right HTTP method (GET or POST) from dropdown
+⋅⋅3. In POST-requests select "Body"-tab and select "form-data" from radio buttons and set data by giving key and value pairs
+
+##### Requests:
+
+	1. POST http://localhost:8080/login 
+	Body: (pairs represent <key> <value> pairs)
+	username wasd
+	password wasd 
+  
+  --> You are now logged in as normal user "wasd" who should not be able to remove signups
+  
+  2. POST http://localhost:8080/eventsignups
+	Body:
+	name test
+	address test
+  
+  --> You can see that signup was registered for "test"
+  
+ 	3. POST http://localhost:8080/eventsignups
+	Body:
+	name test2
+	address test2
+  
+  --> You can see new signup for "test2"
+  
+  4. GET http://localhost:8080/eventsignups
+  
+  --> You can see that response still contains 2 signups
+  
+  5. POST http://localhost:8080/eventsignups/delete
+	Body:
+	name test2
+	address test2
+  
+  --> You can see that "test2" signup was removed from the signups even though user "wasd" should not be able to remove signups
+  
+  6. GET http://localhost:8080/eventsignups
+  
+  --> You can verify that the "test2" signup is removed and that the user "wasd" cannot see the delete buttons 
+  
 
 **How to fix:**
 
+The flaw can be fixed by adding @PreAuthorize("hasAuthority('ROLE_ADMIN')") annotation to EventSignupService removeEventSignup()-method.
+You can verify that the fix works by repeating the above steps with Postman after restarting the application. After step 5. you will get response with status code 403 Forbidden.
 
 ## Issue: A8-Cross-Site Request Forgery (CSRF)
 **Steps to reproduce:**
